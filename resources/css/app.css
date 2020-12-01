@@ -1,0 +1,5 @@
+@import '~terminal.css';
+
+.main {
+  min-height: 70vh;
+}
