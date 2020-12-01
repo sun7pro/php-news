@@ -4,9 +4,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" href="{{ URL::asset('favicon.png') }}" type="image/x-icon" />
+  <link rel="icon" href="{{ asset('favicon.png') }}" type="image/x-icon" />
   <title>PHPNews | Home</title>
-  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -31,5 +31,4 @@
     </footer>
   </main>
 </body>
-
 </html>
