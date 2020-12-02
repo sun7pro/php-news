@@ -21,6 +21,7 @@
         "fakerphp/faker": "^1.9.1",
         "mockery/mockery": "^1.4.2",
         "nunomaduro/collision": "^5.0",
+        "nunomaduro/larastan": "^0.6.10",
         "phpunit/phpunit": "^9.3.3",
         "wataridori/framgia-php-codesniffer": "dev-master"
     },
@@ -61,9 +62,13 @@
         ],
         "phpcs": [
             "@php vendor/bin/phpcs -ps"
+        ],
+        "phpstan": [
+            "@php vendor/bin/phpstan analyse --memory-limit=512M"
         ]
     },
     "scripts-descriptions": {
-        "phpcs": "Runs phpcs with rules in phpcs.xml"
+        "phpcs": "Runs phpcs with rules in phpcs.xml",
+        "phpstan": "Runs static analysis with phpstan"
     }
 }
