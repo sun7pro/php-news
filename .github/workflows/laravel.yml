@@ -1,0 +1,20 @@
+name: Laravel
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  laravel-tests:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install Dependencies
+      run: composer install --no-interaction
+    - name: Check convention with phpcs
+      run: vendor/bin/phpcs -s
+    - name: Static analysis with phpstan
+      run: vendor/bin/phpstan analyse --memory-limit=512M
+
