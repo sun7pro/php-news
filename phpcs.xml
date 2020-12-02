@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<ruleset name="Framgia Extended">
+    <description>Framgia Extended Coding Convention</description>
+    <arg name="tab-width" value="4"/>
+    <arg name="encoding" value="UTF-8"/>
+
+    <!-- Check both app/ and config/ -->
+    <file>./app</file>
+    <file>./config</file>
+
+    <rule ref="Framgia"/>
+    <!-- Check space between operator +-*/ -->
+    <rule ref="Squiz.WhiteSpace.OperatorSpacing">
+        <properties>
+            <property name="ignoreNewlines" value="true" />
+        </properties>
+    </rule>
+    <!-- Line between class method -->
+    <rule ref="Squiz.WhiteSpace.FunctionSpacing">
+        <properties>
+            <property name="spacing" value="1" />
+            <property name="spacingAfterLast" value="0" />
+            <property name="spacingBeforeFirst" value="0" />
+        </properties>
+    </rule>
+</ruleset>
+
