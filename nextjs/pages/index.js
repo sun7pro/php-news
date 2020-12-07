@@ -1,65 +1,60 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Head from 'next/head';
+// import styles from '../styles/Home.module.css';
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <>
       <Head>
-        <title>Create Next App</title>
+        <title>Dev News | Home</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+      <main className="container">
+        <div className="terminal-nav">
+          <div className="terminal-logo">
+            <div className="logo terminal-prompt">
+              <a href="/" className="no-style">
+                Dev News
+              </a>
+            </div>
+          </div>
+          <nav className="terminal-menu">
+            <ul>
+              <li>
+                <a className="menu-item" href="#">
+                  Add new
+                </a>
+              </li>
+              <li>
+                <a className="menu-item" href="#">
+                  Login
+                </a>
+              </li>
+            </ul>
+          </nav>
         </div>
+        <section className="main">
+          <div className="terminal-alert terminal-alert-primary">WIP...</div>
+          <figure>
+            <img src="https://http.cat/102.jpg" />
+          </figure>
+          <div className="progress-bar progress-bar-show-percent">
+            <div
+              className="progress-bar-filled"
+              style={{ width: '5%' }}
+              data-filled="Loading 5%"
+            ></div>
+          </div>
+        </section>
+        <footer>
+          <hr />
+          <small>
+            Built with <u>PHP</u> ❤️ <u>JavaScript</u> and <u> Terminal CSS</u>
+          </small>
+        </footer>
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
-  )
+    </>
+  );
 }
