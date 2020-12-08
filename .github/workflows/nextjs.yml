@@ -1,0 +1,23 @@
+name: NextJS
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  nextjs-build:
+
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: nextjs
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '10'
+    - run: npm install
+    - run: npm run build
+
