@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class UserService
@@ -12,21 +12,15 @@ class UserService
     {
         $avatarUploadedPath = null;
         if ($request->file('avatar')) {
-            $uploadAvatarFolder = 'users';
-            $avatar = $request->file('avatar');
-            $avatarUploadedPath = $avatar->store($uploadAvatarFolder, 'public');
-            $uploadedImageResponse = [
-            'image_name' => basename($avatarUploadedPath),
-            'image_url' => Storage::disk('public')->url($avatarUploadedPath),
-            ];
+            $avatarUploadedPath = $request->file('avatar')->store('users', 'public');
         }
 
         return User::create([
             'name' => $request->input('name'),
             'username' => $request->input('username'),
             'email' => $request->input('email'),
-            'password' => bcrypt($request->input('password')),
-            'avatar' => $avatarUploadedPath ? basename($avatarUploadedPath) : null,
+            'password' => Hash::make($request->input('password')),
+            'avatar' => $avatarUploadedPath ? 'users/' . basename($avatarUploadedPath) : null,
         ]);
     }
 }
