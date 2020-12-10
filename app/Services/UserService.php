@@ -10,6 +10,7 @@ class UserService
 {
     public function create($request)
     {
+        $avatarUploadedPath = null;
         if ($request->file('avatar')) {
             $uploadAvatarFolder = 'users';
             $avatar = $request->file('avatar');
@@ -25,7 +26,7 @@ class UserService
             'username' => $request->input('username'),
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password')),
-            'avatar' => $request->file('avatar') ? basename($avatarUploadedPath) : null,
+            'avatar' => $avatarUploadedPath ? basename($avatarUploadedPath) : null,
         ]);
     }
 }
