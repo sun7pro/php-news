@@ -11,14 +11,11 @@ class UserResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'message' => 'Successfully created the record!',
-            'user' => [
-                'id' => (string)$this->id,
-                'name' => (string)$this->name,
-                'username' => (string)$this->username,
-                'email' => (string)$this->email,
-                'avatar' => $this->avatar ? (string)$this->avatar : null,
-            ],
+            'id' => (string)$this->id,
+            'name' => (string)$this->name,
+            'username' => (string)$this->username,
+            'email' => (string)$this->email,
+            'avatar' => $this->avatar ? (string)$this->avatar : null,
         ];
     }
 }

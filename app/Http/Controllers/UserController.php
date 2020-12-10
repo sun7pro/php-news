@@ -24,6 +24,9 @@ class UserController extends Controller
     {
         $validator = $request->validated();
         $user = $this->userService->create($request);
-        return new UserResource($user);
+        return [
+            'message' => __('Successfully created the record!'),
+            'user' => new UserResource($user),
+        ];
     }
 }
