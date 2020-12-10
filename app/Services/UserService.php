@@ -28,4 +28,4 @@ class UserService
             'avatar' => $request->file('avatar') ? basename($avatarUploadedPath) : null,
         ]);
     }
-};
+}
