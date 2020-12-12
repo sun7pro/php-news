@@ -28,7 +28,7 @@ export default function Home() {
                 </a>
               </li>
               <li>
-                <a className="menu-item" href="#">
+                <a className="menu-item" href="/login">
                   Login
                 </a>
               </li>
