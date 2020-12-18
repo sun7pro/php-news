@@ -5,12 +5,11 @@ import axios from 'axios';
 axios.defaults.withCredentials = true;
 
 export default function Login() {
-
   const [user, setUser] = useState(null);
 
   const fetchUser = () => {
     axios
-      .get(`${ process.env.NEXT_PUBLIC_API_BASE_URL }/api/v1/user`)
+      .get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/user`)
       .then(response => {
         setUser(response.data);
       })
@@ -26,10 +25,12 @@ export default function Login() {
 
     const form = e.target;
 
-    await axios.get(`${ process.env.NEXT_PUBLIC_API_BASE_URL }/sanctum/csrf-cookie`);
+    await axios.get(
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/sanctum/csrf-cookie`,
+    );
 
     axios
-      .post(`${ process.env.NEXT_PUBLIC_API_BASE_URL }/login`, {
+      .post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/login`, {
         usernameOrEmail: form.usernameOrEmail.value,
         password: form.password.value,
       })
@@ -83,7 +84,12 @@ export default function Login() {
             <form onSubmit={handleSubmit}>
               <div className="form-group">
                 <label htmlFor="usernameOrEmail">Username/Email</label>
-                <input id="usernameOrEmail" name="usernameOrEmail" type="text" required="" />
+                <input
+                  id="usernameOrEmail"
+                  name="usernameOrEmail"
+                  type="text"
+                  required=""
+                />
               </div>
               <div className="form-group">
                 <label htmlFor="password">Password</label>
