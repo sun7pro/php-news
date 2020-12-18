@@ -11,20 +11,19 @@ class AuthController extends Controller
     {
         $validator = $request->validated();
 
-        $field = filter_var($request->input('usernameOrEmail'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-        $request->merge([$field => $request->input('usernameOrEmail')]);
-        $credentials = $request->only($field, 'password');
+        $usernameOrEmail = $request->input('usernameOrEmail');
+        $field = filter_var($usernameOrEmail, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        $credentials = [$field => $usernameOrEmail, 'password' => $request->input('password')];
 
         if (Auth::attempt($credentials)) {
             return response([
                 'message' => __('Successfully logged in.'),
-                'isLoginSuccess' => Auth::attempt($credentials),
+                'isLoginSuccess' => true,
             ], 200);
-        } else {
-            return response([
-                'message' => __('Incorrectly logged in.'),
-                'isLoginSuccess' => Auth::attempt($credentials),
-            ], 403);
         }
+        return response([
+            'message' => __('Incorrectly logged in.'),
+            'isLoginSuccess' => false,
+        ], 403);
     }
 }

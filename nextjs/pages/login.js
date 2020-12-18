@@ -1,15 +1,18 @@
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import getConfig from 'next/config'
 
 axios.defaults.withCredentials = true;
 
 export default function Login() {
+
   const [user, setUser] = useState(null);
+  const { publicRuntimeConfig } = getConfig();
 
   const fetchUser = () => {
     axios
-      .get('http://127.0.0.1:8000/api/v1/user')
+      .get(`${ publicRuntimeConfig.API_BASE_URL }/api/v1/user`)
       .then(response => {
         setUser(response.data);
       })
@@ -25,10 +28,10 @@ export default function Login() {
 
     const form = e.target;
 
-    await axios.get('http://127.0.0.1:8000/sanctum/csrf-cookie');
+    await axios.get(`${ publicRuntimeConfig.API_BASE_URL }/sanctum/csrf-cookie`);
 
     axios
-      .post('http://127.0.0.1:8000/login', {
+      .post(`${ publicRuntimeConfig.API_BASE_URL }/login`, {
         usernameOrEmail: form.usernameOrEmail.value,
         password: form.password.value,
       })
