@@ -1,121 +1,50 @@
-import Head from 'next/head';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import Router from 'next/router';
+import withReduxSaga from '..';
+import LoginForm from '../components/LoginForm';
+import { doLogin } from '../redux/login/actions';
+import {
+  selectIsLoginSuccess,
+  selectMessage,
+  selectIsLoading,
+} from '../redux/login/selectors';
 
-axios.defaults.withCredentials = true;
-
-export default function Login() {
-  const [user, setUser] = useState(null);
-
-  const fetchUser = () => {
-    axios
-      .get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/user`)
-      .then(response => {
-        setUser(response.data);
-      })
-      .catch(error => console.log(error));
-  };
-
+const Login = props => {
+  const { isLoginSuccess } = props;
   useEffect(() => {
-    fetchUser();
-  }, []);
-
-  const handleSubmit = async e => {
-    e.preventDefault();
-
-    const form = e.target;
-
-    await axios.get(
-      `${process.env.NEXT_PUBLIC_API_BASE_URL}/sanctum/csrf-cookie`,
-    );
-
-    axios
-      .post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/login`, {
-        usernameOrEmail: form.usernameOrEmail.value,
-        password: form.password.value,
-      })
-      .then(response => {
-        console.log('2nd axios: ', response);
-        if (response.data.isLoginSuccess) {
-          fetchUser();
-        }
-      });
-  };
+    if (isLoginSuccess) {
+      Router.push('/');
+    }
+  }, [isLoginSuccess]);
 
   return (
-    <>
-      <Head>
-        <title>Dev News | Login</title>
-        <link rel="icon" href="/favicon.ico" />
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </Head>
-
-      <main className="container">
-        <div className="terminal-nav">
-          <div className="terminal-logo">
-            <div className="logo terminal-prompt">
-              <a href="/" className="no-style">
-                Dev News
-              </a>
-            </div>
-          </div>
-          <nav className="terminal-menu">
-            <ul>
-              <li>
-                <a className="menu-item" href="#">
-                  Add new
-                </a>
-              </li>
-              <li>
-                <a className="menu-item" href="/login">
-                  Login
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-        <section className="main">
-          {user ? (
-            <div className="terminal-alert terminal-alert-primary">
-              Hello {user.name}
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label htmlFor="usernameOrEmail">Username/Email</label>
-                <input
-                  id="usernameOrEmail"
-                  name="usernameOrEmail"
-                  type="text"
-                  required=""
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
-                <input type="password" id="password" name="password" />
-              </div>
-              <div className="form-group">
-                <button
-                  className="btn btn-default"
-                  type="submit"
-                  role="button"
-                  name="submit"
-                  id="submit"
-                >
-                  Submit
-                </button>
-              </div>
-            </form>
-          )}
-        </section>
-        <footer>
-          <hr />
-          <small>
-            Built with <u>PHP</u> ❤️ <u>JavaScript</u> and <u> Terminal CSS</u>
-          </small>
-        </footer>
-      </main>
-    </>
+    <section className="outlet outlet--login">
+      <h1 className="outlet__title">Login</h1>
+      <LoginForm {...props} />
+    </section>
   );
-}
+};
+
+Login.propTypes = {
+  doLogin: PropTypes.func,
+  isLoading: PropTypes.bool,
+  isLoginSuccess: PropTypes.bool,
+  message: PropTypes.string,
+};
+
+const mapStateToProps = createStructuredSelector({
+  isLoading: selectIsLoading,
+  isLoginSuccess: selectIsLoginSuccess,
+  message: selectMessage,
+});
+
+const mapDispatchToProps = dispatch => ({
+  doLogin: payloads => dispatch(doLogin(payloads)),
+});
+
+export default withReduxSaga(
+  connect(mapStateToProps, mapDispatchToProps)(Login),
+);
