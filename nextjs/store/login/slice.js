@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { doLogin } from './thunks';
-import { setCookie } from '../../services/cookie';
 
 const loginSlice = createSlice({
   name: 'login',
@@ -23,7 +22,7 @@ const loginSlice = createSlice({
       state.isLoading = false;
       state.isSignedIn = action.payload.isSignedIn;
       state.message = action.payload.message;
-      setCookie('P-IS_SIGNED_IN', state.isSignedIn, 7);
+      localStorage.setItem('P-IS_SIGNED_IN', state.isSignedIn);
     },
     [doLogin.rejected]: (state, action) => {
       state.isLoading = false;

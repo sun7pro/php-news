@@ -5,7 +5,6 @@ import { selectLogin } from '../store/login/selector';
 import { selectProfile } from '../store/profile/selector';
 import { getProfile } from '../store/profile/thunks';
 import { updateSignedInStatus } from '../store/login/slice';
-import { getCookie } from '../services/cookie';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -13,7 +12,7 @@ const Header = () => {
   const { profile } = useSelector(selectProfile);
 
   useEffect(() => {
-    if (getCookie('P-IS_SIGNED_IN')) {
+    if (localStorage.getItem('P-IS_SIGNED_IN')) {
       dispatch(updateSignedInStatus(true));
     }
   });
