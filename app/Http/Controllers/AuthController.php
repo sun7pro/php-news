@@ -18,12 +18,12 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             return response([
                 'message' => __('Successfully logged in.'),
-                'isLoginSuccess' => true,
+                'isSignedIn' => true,
             ], 200);
         }
         return response([
             'message' => __('Incorrectly logged in.'),
-            'isLoginSuccess' => false,
+            'isSignedIn' => false,
         ], 403);
     }
 }
