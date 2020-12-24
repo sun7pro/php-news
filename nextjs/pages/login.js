@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import Router from 'next/router';
+import Head from 'next/head';
 import LoginForm from '../components/LoginForm';
 import { doLogin } from '../store/login/thunks';
 import { selectLogin } from '../store/login/selector';
@@ -21,14 +22,19 @@ const LoginPage = () => {
   }, [isSignedIn]);
 
   return (
-    <section className="outlet outlet--login">
-      <h1 className="outlet__title">Login</h1>
-      <LoginForm
-        handleLogin={credential => handleLogin(credential)}
-        isLoading={isLoading}
-        message={message}
-      />
-    </section>
+    <>
+      <Head>
+        <title>PHPNews | Login</title>
+      </Head>
+      <section className="outlet outlet--login">
+        <h1 className="outlet__title">Login</h1>
+        <LoginForm
+          handleLogin={credential => handleLogin(credential)}
+          isLoading={isLoading}
+          message={message}
+        />
+      </section>
+    </>
   );
 };
 

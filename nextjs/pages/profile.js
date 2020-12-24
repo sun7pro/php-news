@@ -1,7 +1,14 @@
+import Head from 'next/head';
+
 const ProfilePage = () => (
-  <section className="main">
-    <div className="terminal-alert terminal-alert-primary">Profile</div>
-  </section>
+  <>
+    <Head>
+      <title>PHPNews | Profile</title>
+    </Head>
+    <section className="main">
+      <div className="terminal-alert terminal-alert-primary">Profile</div>
+    </section>
+  </>
 );
 
 export default ProfilePage;
