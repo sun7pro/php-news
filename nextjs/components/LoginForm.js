@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 
-const LoginForm = ({ doLogin, isLoading, message }) => {
+const LoginForm = ({ handleLogin, isLoading, message }) => {
   const handleSubmit = event => {
     event.preventDefault();
     const fields = event.target;
-    doLogin({
+    handleLogin({
       usernameOrEmail: fields.usernameOrEmail.value,
       password: fields.password.value,
     });
@@ -26,8 +26,8 @@ const LoginForm = ({ doLogin, isLoading, message }) => {
         <input type="password" id="password" name="password" required={true} />
       </div>
       <div className="form-group">
-        <button className="btn btn-default" type="submit" disabled={isLoading}>
-          {isLoading ? 'Waiting...' : 'Login'}
+        <button className="btn btn-default" type="submit">
+          {isLoading ? 'Waiting...' : 'Login'}{' '}
         </button>
       </div>
       {message && (
@@ -43,7 +43,7 @@ const LoginForm = ({ doLogin, isLoading, message }) => {
 };
 
 LoginForm.propTypes = {
-  doLogin: PropTypes.func,
+  handleLogin: PropTypes.func,
   isLoading: PropTypes.bool,
   message: PropTypes.string,
 };

@@ -1,49 +1,68 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import axios from 'axios';
-import { createStructuredSelector } from 'reselect';
-import withReduxSaga from '..';
-import { sendLoginResult } from '../redux/login/actions';
-import { selectIsLoginSuccess } from '../redux/login/selectors';
-import Menu from '../components/Menu';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Link from 'next/link';
+import { selectLogin } from '../store/login/selector';
+import { selectProfile } from '../store/profile/selector';
+import { getProfile } from '../store/profile/thunks';
+import { updateSignedInStatus } from '../store/login/slice';
+import { getCookie } from '../services/cookie';
 
-axios.defaults.withCredentials = true;
-
-const Header = ({ sendLoginResult, isLoginSuccess }) => {
-  const getProfile = () => {
-    axios
-      .get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/v1/user`)
-      .then(() => {
-        sendLoginResult({ isLoginSuccess: true });
-      })
-      .catch(() => sendLoginResult({ isLoginSuccess: false }));
-  };
-
-  const handleLogout = () => {
-    sendLoginResult({ isLoginSuccess: false });
-  };
+const Header = () => {
+  const dispatch = useDispatch();
+  const { isSignedIn } = useSelector(selectLogin);
+  const { profile } = useSelector(selectProfile);
 
   useEffect(() => {
-    getProfile();
-  }, []);
+    if (getCookie('P-IS_SIGNED_IN')) {
+      dispatch(updateSignedInStatus(true));
+    }
+  });
 
-  return <Menu isLoginSuccess={isLoginSuccess} handleLogout={handleLogout} />;
+  useEffect(() => {
+    if (isSignedIn) {
+      dispatch(getProfile());
+    }
+  }, [isSignedIn]);
+
+  return (
+    <div className="terminal-nav">
+      <div className="terminal-logo">
+        <div className="logo terminal-prompt">
+          <Link href="/">
+            <a className="no-style" title="Logo">
+              Dev News
+            </a>
+          </Link>
+        </div>
+      </div>
+      <nav className="terminal-menu">
+        <ul>
+          <li>
+            <Link href="/add-post">
+              <a className="menu-item" title="Add new post">
+                Add new
+              </a>
+            </Link>
+          </li>
+          <li>
+            {isSignedIn ? (
+              <Link href="/profile">
+                <a className="menu-item" title="Profile">
+                  {profile ? profile.name : '...'}
+                </a>
+              </Link>
+            ) : (
+              <Link href="/login">
+                <a className="menu-item" title="Login">
+                  Login
+                </a>
+              </Link>
+            )}
+          </li>
+        </ul>
+      </nav>
+    </div>
+  );
 };
 
-Header.propTypes = {
-  sendLoginResult: PropTypes.func,
-  isLoginSuccess: PropTypes.bool,
-};
-
-const mapStateToProps = createStructuredSelector({
-  isLoginSuccess: selectIsLoginSuccess,
-});
-
-const mapDispatchToProps = dispatch => ({
-  sendLoginResult: payloads => dispatch(sendLoginResult(payloads)),
-});
-
-export default withReduxSaga(
-  connect(mapStateToProps, mapDispatchToProps)(Header),
-);
+export default Header;

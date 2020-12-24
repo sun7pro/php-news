@@ -1,8 +1,3 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import withReduxSaga from '..';
-
 const Home = () => (
   <section className="main">
     <div className="terminal-alert terminal-alert-primary">WIP...</div>
@@ -19,10 +14,4 @@ const Home = () => (
   </section>
 );
 
-const mapStateToProps = createStructuredSelector({});
-
-const mapDispatchToProps = () => ({});
-
-export default withReduxSaga(
-  connect(mapStateToProps, mapDispatchToProps)(Home),
-);
+export default Home;

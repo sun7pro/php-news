@@ -1,7 +1,7 @@
-const AddPost = () => (
+const AddPostPage = () => (
   <section className="main">
-    <div className="terminal-alert terminal-alert-primary">Add post</div>
+    <div className="terminal-alert terminal-alert-primary">Add new</div>
   </section>
 );
 
-export default AddPost;
+export default AddPostPage;
