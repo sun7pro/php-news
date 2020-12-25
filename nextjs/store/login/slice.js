@@ -27,13 +27,15 @@ const loginSlice = createSlice({
       delete state.message;
     },
     [doLogin.fulfilled]: (state, action) => {
+      console.log(action.payload);
       state.isLoading = false;
       state.isSignedIn = action.payload.isSignedIn;
-      state.message = '';
       if (action.payload.isSignedIn) {
         localStorage.setItem('P-IS_SIGNED_IN', state.isSignedIn);
+        state.message = '';
       } else {
         localStorage.removeItem('P-IS_SIGNED_IN', state.isSignedIn);
+        state.message = action.payload.message;
       }
     },
     [doLogin.rejected]: (state, action) => {

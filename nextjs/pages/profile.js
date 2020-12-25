@@ -13,37 +13,43 @@ const ProfilePage = () => {
       Router.push('/');
     }
   });
-  
+
   return (
     <>
       <Head>
         <title>PHPNews | Profile</title>
       </Head>
       <section className="outlet outlet--login">
-        {/* <h1 className="outlet__title">Profile: { profile ? profile.name : 'NOPE' }</h1> */}
         <div className="terminal-card">
           <header>Profile</header>
-          {
-            profile && (
-              <figure>
-                { profile.avatar && <img src="#" alt={`@${profile.username}'s avatar`} title={`@${profile.username}'s avatar`} width="150px" /> }
-                <figcaption>{ `@${profile.username}` }</figcaption>
-              </figure>
-            )
-          }
+          {profile && (
+            <figure>
+              {profile.avatar && (
+                <img
+                  src="#"
+                  alt={`@${profile.username}'s avatar`}
+                  title={`@${profile.username}'s avatar`}
+                  width="150px"
+                />
+              )}
+              <figcaption>{`@${profile.username}`}</figcaption>
+            </figure>
+          )}
           <ul>
-            {
-              profile && (
-                Object.entries(profile).map(([key,value])=>{
-                  switch(key) {
-                    case 'id', 'avatar':
-                      break;
-                    default:
-                      return (<li>{key.charAt(0).toUpperCase() + key.slice(1)}: { value && value }</li>);
-                  }
-                })
-              )
-            }
+            {profile &&
+              Object.entries(profile).map(([key, value]) => {
+                switch (key) {
+                  case ('id', 'avatar'):
+                    break;
+                  default:
+                    return (
+                      <li key={key}>
+                        {key.charAt(0).toUpperCase() + key.slice(1)}:{' '}
+                        {value && value}
+                      </li>
+                    );
+                }
+              })}
           </ul>
         </div>
       </section>

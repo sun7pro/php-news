@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
+import Router from 'next/router';
 import { selectLogin } from '../store/login/selector';
 import { selectProfile } from '../store/profile/selector';
 import { getProfile } from '../store/profile/thunks';
@@ -10,6 +11,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const { isSignedIn } = useSelector(selectLogin);
   const { profile } = useSelector(selectProfile);
+
   useEffect(() => {
     if (localStorage.getItem('P-IS_SIGNED_IN')) {
       dispatch(updateSignedInStatus(true));
@@ -22,9 +24,9 @@ const Header = () => {
 
   const handleLogout = () => {
     dispatch(updateSignedInStatus(false));
+    Router.push('/');
   };
 
-  console.log(profile);
   return (
     <div className="terminal-nav">
       <div className="terminal-logo">
@@ -45,15 +47,15 @@ const Header = () => {
               </a>
             </Link>
           </li>
-          <li>
-            {(isSignedIn && profile ) && (
+          {isSignedIn && profile && (
+            <li>
               <Link href="/profile">
                 <a className="menu-item" title="Profile">
                   {profile.name ? profile.name : `@${profile.username}`}
                 </a>
               </Link>
-            )}
-          </li>
+            </li>
+          )}
           <li>
             {isSignedIn ? (
               <a className="menu-item" title="Logout" onClick={handleLogout}>
