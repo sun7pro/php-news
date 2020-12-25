@@ -10,7 +10,6 @@ const Header = () => {
   const dispatch = useDispatch();
   const { isSignedIn } = useSelector(selectLogin);
   const { profile } = useSelector(selectProfile);
-
   useEffect(() => {
     if (localStorage.getItem('P-IS_SIGNED_IN')) {
       dispatch(updateSignedInStatus(true));
@@ -18,11 +17,14 @@ const Header = () => {
   });
 
   useEffect(() => {
-    if (isSignedIn) {
-      dispatch(getProfile());
-    }
+    dispatch(getProfile());
   }, [isSignedIn]);
 
+  const handleLogout = () => {
+    dispatch(updateSignedInStatus(false));
+  };
+
+  console.log(profile);
   return (
     <div className="terminal-nav">
       <div className="terminal-logo">
@@ -43,13 +45,21 @@ const Header = () => {
               </a>
             </Link>
           </li>
+          <li>{isSignedIn ? 'TRUE' : 'FALSE'}</li>
           <li>
-            {isSignedIn ? (
+            {isSignedIn && (
               <Link href="/profile">
                 <a className="menu-item" title="Profile">
-                  {profile ? profile.name : '...'}
+                  {profile.name ? profile.name : `@${profile.username}`}
                 </a>
               </Link>
+            )}
+          </li>
+          <li>
+            {isSignedIn ? (
+              <a className="menu-item" title="Logout" onClick={handleLogout}>
+                Logout
+              </a>
             ) : (
               <Link href="/login">
                 <a className="menu-item" title="Login">

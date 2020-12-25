@@ -8,8 +8,5 @@ Route::group([
     'prefix' => 'v1',
 ], function () {
     Route::post('register', [UserController::class, 'register']);
-
-    Route::middleware('auth:sanctum')->get('/profile', function (Request $request) {
-        return $request->user();
-    });
+    Route::middleware('auth:sanctum')->get('profile', [UserController::class, 'profile']);
 });

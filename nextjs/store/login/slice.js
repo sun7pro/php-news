@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { doLogin } from './thunks';
+import { deleteAllCookies } from '../../services/cookie';
 
 const loginSlice = createSlice({
   name: 'login',
@@ -11,6 +12,13 @@ const loginSlice = createSlice({
   reducers: {
     updateSignedInStatus: (state, action) => {
       state.isSignedIn = action.payload;
+      console.log(action.payload, typeof action.payload);
+      if (state.isSignedIn) {
+        localStorage.setItem('P-IS_SIGNED_IN', state.isSignedIn);
+      } else {
+        localStorage.removeItem('P-IS_SIGNED_IN', state.isSignedIn);
+        deleteAllCookies();
+      }
     },
   },
   extraReducers: {
@@ -21,8 +29,12 @@ const loginSlice = createSlice({
     [doLogin.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.isSignedIn = action.payload.isSignedIn;
-      state.message = action.payload.message;
-      localStorage.setItem('P-IS_SIGNED_IN', state.isSignedIn);
+      state.message = '';
+      if (action.payload.isSignedIn) {
+        localStorage.setItem('P-IS_SIGNED_IN', state.isSignedIn);
+      } else {
+        localStorage.removeItem('P-IS_SIGNED_IN', state.isSignedIn);
+      }
     },
     [doLogin.rejected]: (state, action) => {
       state.isLoading = false;
