@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { doLogin } from './thunks';
+import { doLogin, doLogout } from './thunks';
 
 const loginSlice = createSlice({
   name: 'login',
@@ -11,11 +11,7 @@ const loginSlice = createSlice({
   reducers: {
     updateSignedInStatus: (state, action) => {
       state.isSignedIn = action.payload;
-      if (state.isSignedIn) {
-        localStorage.setItem('P-IS_SIGNED_IN', state.isSignedIn);
-      } else {
-        localStorage.removeItem('P-IS_SIGNED_IN');
-      }
+      handleLocalStorage(state.isSignedIn);
     },
   },
   extraReducers: {
@@ -26,21 +22,36 @@ const loginSlice = createSlice({
     [doLogin.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.isSignedIn = action.payload.isSignedIn;
-      if (action.payload.isSignedIn) {
-        localStorage.setItem('P-IS_SIGNED_IN', state.isSignedIn);
-        state.message = '';
-      } else {
-        localStorage.removeItem('P-IS_SIGNED_IN');
-        state.message = action.payload.message;
-      }
+      handleLocalStorage(state.isSignedIn);
+      state.message = state.isSignedIn ? '' : action.payload.message;
     },
     [doLogin.rejected]: (state, action) => {
       state.isLoading = false;
       state.isSignedIn = action.payload.isSignedIn;
       state.message = action.payload.message;
     },
+    [doLogout.pending]: state => {
+      state.isLoading = true;
+      delete state.message;
+    },
+    [doLogout.fulfilled]: state => {
+      state.isLoading = false;
+      state.isSignedIn = false;
+      handleLocalStorage(false);
+    },
+    [doLogout.rejected]: state => {
+      state.isLoading = false;
+    },
   },
 });
+
+const handleLocalStorage = isSignedIn => {
+  if (isSignedIn) {
+    localStorage.setItem('P-IS_SIGNED_IN', true);
+  } else {
+    localStorage.removeItem('P-IS_SIGNED_IN');
+  }
+};
 
 export const { updateSignedInStatus } = loginSlice.actions;
 

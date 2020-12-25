@@ -5,6 +5,7 @@ import Router from 'next/router';
 import { selectLogin } from '../store/login/selector';
 import { selectProfile } from '../store/profile/selector';
 import { getProfile } from '../store/profile/thunks';
+import { doLogout } from '../store/login/thunks';
 import { updateSignedInStatus } from '../store/login/slice';
 
 const Header = () => {
@@ -23,10 +24,8 @@ const Header = () => {
   }, [isSignedIn]);
 
   const handleLogout = () => {
-    dispatch(updateSignedInStatus(false));
-    Router.push('/');
+    dispatch(doLogout());
   };
-
   return (
     <div className="terminal-nav">
       <div className="terminal-logo">
@@ -47,7 +46,7 @@ const Header = () => {
               </a>
             </Link>
           </li>
-          {isSignedIn && profile && (
+          {profile && (
             <li>
               <Link href="/profile">
                 <a className="menu-item" title="Profile">
