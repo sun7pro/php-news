@@ -45,9 +45,8 @@ const Header = () => {
               </a>
             </Link>
           </li>
-          <li>{isSignedIn ? 'TRUE' : 'FALSE'}</li>
           <li>
-            {isSignedIn && (
+            {(isSignedIn && profile ) && (
               <Link href="/profile">
                 <a className="menu-item" title="Profile">
                   {profile.name ? profile.name : `@${profile.username}`}
