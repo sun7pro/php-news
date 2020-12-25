@@ -23,34 +23,23 @@ const ProfilePage = () => {
         <div className="terminal-card">
           <header>Profile</header>
           {profile && (
-            <figure>
-              {profile.avatar && (
-                <img
-                  src="#"
-                  alt={`@${profile.username}'s avatar`}
-                  title={`@${profile.username}'s avatar`}
-                  width="150px"
-                />
-              )}
-              <figcaption>{`@${profile.username}`}</figcaption>
-            </figure>
+            <>
+              <figure>
+                {profile.avatar && (
+                  <img
+                    src="#"
+                    alt={`@${profile.username}'s avatar`}
+                    title={`@${profile.username}'s avatar`}
+                  />
+                )}
+                <figcaption>{`@${profile.username}`}</figcaption>
+              </figure>
+              <ul>
+                <li>{`Name: ${profile.name}`}</li>
+                <li>{`Email: ${profile.email}`}</li>
+              </ul>
+            </>
           )}
-          <ul>
-            {profile &&
-              Object.entries(profile).map(([key, value]) => {
-                switch (key) {
-                  case ('id', 'avatar'):
-                    break;
-                  default:
-                    return (
-                      <li key={key}>
-                        {key.charAt(0).toUpperCase() + key.slice(1)}:{' '}
-                        {value && value}
-                      </li>
-                    );
-                }
-              })}
-          </ul>
         </div>
       </section>
     </>

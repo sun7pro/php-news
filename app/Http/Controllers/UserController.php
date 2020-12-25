@@ -32,9 +32,6 @@ class UserController extends Controller
 
     public function profile(Request $request)
     {
-        return [
-            'message' => __('Successfully got the profile.'),
-            'user' => new UserResource($request->user()),
-        ];
+        return new UserResource($request->user());
     }
 }

@@ -15,7 +15,7 @@ const loginSlice = createSlice({
     },
     [getProfile.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.profile = action.payload.user ? { ...action.payload.user } : null;
+      state.profile = action.payload ? { ...action.payload } : null;
     },
     [getProfile.rejected]: state => {
       state.isLoading = false;
