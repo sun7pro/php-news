@@ -27,7 +27,7 @@ const LoginForm = ({ handleLogin, isLoading, message }) => {
       </div>
       <div className="form-group">
         <button className="btn btn-default" type="submit">
-          {isLoading ? 'Waiting...' : 'Login'}{' '}
+          {isLoading ? 'Waiting...' : 'Login'}
         </button>
       </div>
       {message && (

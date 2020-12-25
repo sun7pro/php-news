@@ -11,6 +11,11 @@ const loginSlice = createSlice({
   reducers: {
     updateSignedInStatus: (state, action) => {
       state.isSignedIn = action.payload;
+      if (state.isSignedIn) {
+        localStorage.setItem('P-IS_SIGNED_IN', state.isSignedIn);
+      } else {
+        localStorage.removeItem('P-IS_SIGNED_IN');
+      }
     },
   },
   extraReducers: {
@@ -21,8 +26,13 @@ const loginSlice = createSlice({
     [doLogin.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.isSignedIn = action.payload.isSignedIn;
-      state.message = action.payload.message;
-      localStorage.setItem('P-IS_SIGNED_IN', state.isSignedIn);
+      if (action.payload.isSignedIn) {
+        localStorage.setItem('P-IS_SIGNED_IN', state.isSignedIn);
+        state.message = '';
+      } else {
+        localStorage.removeItem('P-IS_SIGNED_IN');
+        state.message = action.payload.message;
+      }
     },
     [doLogin.rejected]: (state, action) => {
       state.isLoading = false;

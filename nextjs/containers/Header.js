@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
+import Router from 'next/router';
 import { selectLogin } from '../store/login/selector';
 import { selectProfile } from '../store/profile/selector';
 import { getProfile } from '../store/profile/thunks';
@@ -18,10 +19,13 @@ const Header = () => {
   });
 
   useEffect(() => {
-    if (isSignedIn) {
-      dispatch(getProfile());
-    }
+    dispatch(getProfile());
   }, [isSignedIn]);
+
+  const handleLogout = () => {
+    dispatch(updateSignedInStatus(false));
+    Router.push('/');
+  };
 
   return (
     <div className="terminal-nav">
@@ -43,13 +47,20 @@ const Header = () => {
               </a>
             </Link>
           </li>
-          <li>
-            {isSignedIn ? (
+          {isSignedIn && profile && (
+            <li>
               <Link href="/profile">
                 <a className="menu-item" title="Profile">
-                  {profile ? profile.name : '...'}
+                  {profile.name ? profile.name : `@${profile.username}`}
                 </a>
               </Link>
+            </li>
+          )}
+          <li>
+            {isSignedIn ? (
+              <a className="menu-item" title="Logout" onClick={handleLogout}>
+                Logout
+              </a>
             ) : (
               <Link href="/login">
                 <a className="menu-item" title="Login">

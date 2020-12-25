@@ -4,12 +4,21 @@ import { getProfile } from './thunks';
 const loginSlice = createSlice({
   name: 'profile',
   initialState: {
+    isLoading: false,
     profile: null,
   },
   reducers: {},
   extraReducers: {
+    [getProfile.pending]: state => {
+      state.isLoading = true;
+      delete state.message;
+    },
     [getProfile.fulfilled]: (state, action) => {
-      state.profile = { ...action.payload };
+      state.isLoading = false;
+      state.profile = action.payload ? { ...action.payload } : null;
+    },
+    [getProfile.rejected]: state => {
+      state.isLoading = false;
     },
   },
 });
