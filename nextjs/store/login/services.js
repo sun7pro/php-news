@@ -10,3 +10,8 @@ export const sendLoginRequest = credentials =>
     url: `${process.env.NEXT_PUBLIC_API_BASE_URL}/login`,
     data: credentials,
   });
+
+export const sendLogoutRequest = () =>
+  Request.post({
+    url: `${process.env.NEXT_PUBLIC_API_BASE_URL}/logout`,
+  });

@@ -26,4 +26,9 @@ class AuthController extends Controller
             'isSignedIn' => false,
         ], 403);
     }
+
+    public function logout()
+    {
+        Auth::logout();
+    }
 }
