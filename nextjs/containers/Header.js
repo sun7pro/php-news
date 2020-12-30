@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
-import Router from 'next/router';
 import { selectLogin } from '../store/login/selector';
 import { selectProfile } from '../store/profile/selector';
 import { getProfile } from '../store/profile/thunks';
