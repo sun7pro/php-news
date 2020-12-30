@@ -9,4 +9,4 @@ export default function requestHelper({ method, options }) {
   })
     .then(response => response.data)
     .catch(err => err.response.data);
-}
+};

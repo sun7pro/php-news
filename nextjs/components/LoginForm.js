@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
+import Link from 'next/link';
 
 const LoginForm = ({ handleLogin, isLoading, message }) => {
+
   const handleSubmit = event => {
     event.preventDefault();
     const fields = event.target;
@@ -38,6 +40,16 @@ const LoginForm = ({ handleLogin, isLoading, message }) => {
           </button>
         </div>
       )}
+      <div>
+        Not a member?
+        <span> </span>
+        <Link href="/register">
+          <a className="no-style" title="Signup Now">
+            Register Now
+          </a>
+        </Link>
+        .
+      </div>
     </form>
   );
 };
