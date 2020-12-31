@@ -1,0 +1,16 @@
+@import 'terminal.css/dist/terminal.css';
+
+.form-group {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.form-group label {
+  width: 20%;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group button {
+  width: 80%;
+}
