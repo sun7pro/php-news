@@ -35,7 +35,7 @@ class User extends Authenticatable
         return $value ? Storage::disk('public')->url($value) : null;
     }
 
-    public function post()
+    public function posts()
     {
         return $this->hasMany(Post::class);
     }

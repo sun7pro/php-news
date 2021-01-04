@@ -11,7 +11,7 @@ class PostService
     public function create($request)
     {
         return Post::create([
-            'link' => $request->input('link') ? $request->input('link') : '',
+            'link' => $request->input('link', ''),
             'title' => $request->input('title'),
             'content' => $request->input('content'),
             'user_id' => $request->user() ? $request->user()->id : null,

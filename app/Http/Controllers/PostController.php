@@ -17,7 +17,7 @@ class PostController extends Controller
 
     public function create(PostRequest $request)
     {
-        $validator = $request->validated();
+        $request->validated();
         $post = $this->postService->create($request);
         return [
             'message' => __('Successfully created the record!'),
