@@ -1,7 +1,8 @@
 import Request from '../../services/APIService';
+import { BASE_URL_API } from '../../constants';
 
 export const sendAddPostRequest = post =>
   Request.post({
-    url: `${process.env.BASE_URL_API}/posts`,
+    url: `${BASE_URL_API}/posts`,
     data: post,
   });

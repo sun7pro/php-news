@@ -1,4 +1,5 @@
 import Request from '../../services/APIService';
+import { LOGIN_URL, LOGOUT_URL } from '../../constants';
 
 export const sendCSRFRequest = () =>
   Request.get({
@@ -7,11 +8,11 @@ export const sendCSRFRequest = () =>
 
 export const sendLoginRequest = credentials =>
   Request.post({
-    url: `${process.env.LOGIN_URL}`,
+    url: LOGIN_URL,
     data: credentials,
   });
 
 export const sendLogoutRequest = () =>
   Request.post({
-    url: `${process.env.LOGOUT_URL}`,
+    url: LOGOUT_URL,
   });
