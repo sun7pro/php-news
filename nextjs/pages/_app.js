@@ -1,7 +1,7 @@
 import { Provider } from 'react-redux';
 import Layout from '../components/Layout';
 import store from '../store';
-import 'terminal.css/dist/terminal.css';
+import '../styles/index.css';
 
 const MyApp = ({ Component, pageProps }) => {
   return (

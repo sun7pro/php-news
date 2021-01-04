@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Post;
 
 class User extends Authenticatable
 {
@@ -32,5 +33,10 @@ class User extends Authenticatable
     public function getAvatarAttribute($value)
     {
         return $value ? Storage::disk('public')->url($value) : null;
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
     }
 }

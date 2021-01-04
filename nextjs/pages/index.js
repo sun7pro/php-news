@@ -1,6 +1,6 @@
 const Home = () => (
   <section className="main">
-    <div className="terminal-alert terminal-alert-primary">WIP...</div>
+    <div className="terminal-alert terminal-alert-primary">Post List</div>
     <figure>
       <img src="https://http.cat/102.jpg" />
     </figure>
