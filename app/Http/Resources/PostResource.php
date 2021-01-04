@@ -15,7 +15,7 @@ class PostResource extends JsonResource
             'title' => (string)$this->title,
             'content' => (string)$this->content,
             'link' => $this->link ? (string)$this->link : '',
-            'user_id' => $this->user_id ? (string)$this->user_id : null,
+            'user_id' => (string)$this->user_id,
         ];
     }
 }

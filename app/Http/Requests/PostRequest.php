@@ -15,7 +15,7 @@ class PostRequest extends FormRequest
     {
         return [
             'link' => ['nullable', 'url'],
-            'user_id' => ['nullable', 'string'],
+            'user_id' => ['string'],
             'title' => ['required', 'string', 'min:1', 'max:255'],
             'content' => ['required', 'string', 'min:1', 'max:1023'],
         ];

@@ -14,7 +14,7 @@ class PostService
             'link' => $request->input('link', ''),
             'title' => $request->input('title'),
             'content' => $request->input('content'),
-            'user_id' => $request->user() ? $request->user()->id : null,
+            'user_id' => $request->user()->id,
         ]);
     }
 }
