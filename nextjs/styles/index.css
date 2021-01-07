@@ -14,3 +14,68 @@
 .form-group button {
   width: 80%;
 }
+
+.filter-box {
+  display: inline-block;
+  margin: 1em 0;
+}
+
+.post {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post .title {
+  display: inline-block;
+  width: 75%;
+  color: #333;
+}
+
+.post .title:hover {
+  background: transparent;
+}
+
+.post h3 {
+  margin: 0;
+}
+
+.vote-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.vote-box span {
+  display: inline-block;
+  padding: 0 6px;
+  cursor: pointer;
+  transition: 0.2s;
+  border-radius: 10px;
+}
+
+.vote-box span:first-child:hover,
+.vote-box span:last-child:hover {
+  transition: 0.2s;
+  background: #e1e1e14d;
+}
+
+.infor {
+  display: flex;
+  flex-direction: column;
+  text-align: end;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+}
+
+.pagination a {
+  display: inline-block;
+  padding: 5px;
+}
+
+.filter-box a.active {
+  background: #1a95e0;
+  color: #fff;
+}

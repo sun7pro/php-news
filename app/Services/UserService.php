@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
@@ -22,5 +21,10 @@ class UserService
             'password' => Hash::make($request->input('password')),
             'avatar' => $avatarUploadedPath ? 'users/' . basename($avatarUploadedPath) : null,
         ]);
+    }
+
+    public function retrieve($request)
+    {
+        return User::find($this->user_id);
     }
 }

@@ -11,20 +11,16 @@ import { selectLogin } from '../store/login/selector';
 import AddPostForm from '../components/AddPostForm';
 
 const AddPostPage = () => {
-
   const dispatch = useDispatch();
   const { isLoading, errors } = useSelector(selectAddPost);
   const { isSignedIn } = useSelector(selectLogin);
 
   const handleAddPost = post => {
     dispatch(addPost(post));
-  };
-
-  useEffect(() => {
-    if (!isLoading && errors === undefined) {
+    if (errors === undefined) {
       Router.push('/');
     }
-  });
+  };
 
   useEffect(() => {
     return () => {
@@ -38,28 +34,25 @@ const AddPostPage = () => {
         <title>PHPNews | Add new post</title>
       </Head>
       <section className="outlet outlet--add-post">
-        {
-          isSignedIn ? (
-            <>
-              <h1 className="outlet__title">Add new</h1>
-              <AddPostForm
-                handleAddPost={handleAddPost}
-                errors={errors}
-                isLoading={isLoading}
-              />
-            </>
-          ) : (
-            <div className="terminal-alert terminal-alert-error">
-              You only can add post if logged in.
-              <Link href="/login">
-                <a className="no-style" title="Login Now">
-                  Login now
-                </a>
-              </Link>
-            </div>
-          )
-        }
-        
+        {isSignedIn ? (
+          <>
+            <h1 className="outlet__title">Add new</h1>
+            <AddPostForm
+              handleAddPost={handleAddPost}
+              errors={errors}
+              isLoading={isLoading}
+            />
+          </>
+        ) : (
+          <div className="terminal-alert terminal-alert-error">
+            You only can add post if logged in.
+            <Link href="/login">
+              <a className="no-style" title="Login Now">
+                Login now
+              </a>
+            </Link>
+          </div>
+        )}
       </section>
     </>
   );

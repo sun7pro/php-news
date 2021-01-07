@@ -20,7 +20,7 @@ const addPostSlice = createSlice({
     },
     [addPost.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.errors = action.payload.errors && action.payload.errors;
+      state.errors = action.payload.errors;
     },
     [addPost.rejected]: state => {
       state.isLoading = false;
