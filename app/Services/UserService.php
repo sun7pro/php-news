@@ -22,9 +22,4 @@ class UserService
             'avatar' => $avatarUploadedPath ? 'users/' . basename($avatarUploadedPath) : null,
         ]);
     }
-
-    public function retrieve($request)
-    {
-        return User::find($this->user_id);
-    }
 }
