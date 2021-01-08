@@ -22,3 +22,10 @@ export const timer = date => {
   }
   return Math.floor(seconds) + ' seconds ago';
 };
+
+export const showTime = date => {
+  const createAt = new Date(date);
+  return `${createAt.toString().slice(16, 21)}, ${createAt
+    .toString()
+    .slice(4, 15)}`;
+};

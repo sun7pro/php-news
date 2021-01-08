@@ -20,8 +20,11 @@ class PostService
     public function getAll($dateParams)
     {
         if ($dateParams == 'today') {
-            return Post::whereDate('created_at', Carbon::today())->orderBy('created_at', 'desc')->paginate(8);
+            return Post::with('user')
+                ->whereDate('created_at', Carbon::today())
+                ->orderBy('created_at', 'desc')
+                ->paginate(8);
         }
-        return Post::orderBy('created_at', 'desc')->paginate(8);
+        return Post::with('user')->orderBy('created_at', 'desc')->paginate(8);
     }
 }

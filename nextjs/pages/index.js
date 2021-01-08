@@ -28,74 +28,70 @@ const Home = () => {
 
   return (
     <section className="main">
-      <>
-        <div className="filter-box">
-          <Link
-            href={{ pathname: '/', query: { ...router.query, date: 'today' } }}
+      <div className="filter-box">
+        <Link
+          href={{ pathname: '/', query: { ...router.query, date: 'today' } }}
+        >
+          <a
+            title="Sort by date"
+            onClick={() => getPostByPage({ date: 'today' })}
+            className={date == 'today' ? 'active' : ''}
           >
-            <a
-              title="Sort by date"
-              onClick={() => getPostByPage({ date: 'today' })}
-              className={date == 'today' ? 'active' : ''}
-            >
-              Today
-            </a>
-          </Link>
-          |
-          <Link
-            href={{ pathname: '/', query: { ...router.query, date: 'all' } }}
+            Today
+          </a>
+        </Link>
+        |
+        <Link href={{ pathname: '/', query: { ...router.query, date: 'all' } }}>
+          <a
+            title="Profile"
+            className={date !== 'today' ? 'active' : ''}
+            onClick={() => getPostByPage({ date: 'all' })}
           >
-            <a
-              title="Profile"
-              className={date !== 'today' ? 'active' : ''}
-              onClick={() => getPostByPage({ date: 'all' })}
-            >
-              All
-            </a>
-          </Link>
-        </div>
-        <section>
-          {isLoading ? (
-            'W a i t i n g . . .'
-          ) : (
-            <>
-              {response && response.posts && (
-                <>
-                  {response.posts.map(post => (
-                    <PostItem
-                      key={post.id}
-                      title={post.title}
-                      username={post.author.username}
-                      created_at={post.created_at}
-                    />
-                  ))}
-                  <div className="filter-box pagination">
-                    {[...Array(response.page_total)].map((item, index) => (
-                      <Link
-                        href={{
-                          pathname: '/',
-                          query: { ...router.query, page: index + 1 },
-                        }}
-                        key={index}
+            All
+          </a>
+        </Link>
+      </div>
+      <section>
+        {isLoading ? (
+          'W a i t i n g . . .'
+        ) : (
+          <>
+            {response && response.posts && (
+              <>
+                {response.posts.map(post => (
+                  <PostItem
+                    key={post.id}
+                    title={post.title}
+                    username={post.author.username}
+                    created_at={post.created_at}
+                  />
+                ))}
+                <div className="filter-box pagination">
+                  {[...Array(response.page_total)].map((item, index) => (
+                    <Link
+                      href={{
+                        pathname: '/',
+                        query: { ...router.query, page: index + 1 },
+                      }}
+                      key={index}
+                    >
+                      <a
+                        title="Sort by page"
+                        className={
+                          response.current_page === index + 1 ? 'active' : ''
+                        }
+                        onClick={() => getPostByPage({ page: index + 1 })}
                       >
-                        <a
-                          title="Sort by page"
-                          className={
-                            response.current_page === index + 1 ? 'active' : ''
-                          }
-                          onClick={() => getPostByPage({ page: index + 1 })}
-                        >
-                          {index + 1}
-                        </a>
-                      </Link>
-                    ))}
-                  </div>
-                </>
-              )}
-            </>
-          )}
-        </section>
-      </>
+                        {index + 1}
+                      </a>
+                    </Link>
+                  ))}
+                </div>
+              </>
+            )}
+          </>
+        )}
+      </section>
     </section>
   );
 };

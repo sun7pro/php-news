@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import { timer } from '../services/timer';
+import { timer, showTime } from '../services/timer';
 
 const PostItem = ({ title, username, created_at }) => (
   <div className="terminal-alert post">
@@ -17,7 +17,9 @@ const PostItem = ({ title, username, created_at }) => (
 
     <div className="infor">
       <span className="author">{`@${username}`}</span>
-      <span className="time">{timer(new Date(created_at))}</span>
+      <span className="time" title={showTime(created_at)}>
+        {timer(new Date(created_at))}
+      </span>
     </div>
   </div>
 );
