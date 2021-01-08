@@ -28,7 +28,7 @@ class PostController extends Controller
 
     public function getAll(Request $request)
     {
-        $result = $this->postService->getAll($request->date);
+        $result = $this->postService->getAll($request->input('date'));
         return [
             'current_page' => $result->currentPage(),
             'posts' => PostResource::collection($result->items()),
