@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { sendGetPostsRequest } from './services';
 
 export const getPosts = createAsyncThunk(
-  'post/createPost',
+  'post/getPosts',
   async (filter, thunkAPI) => {
     try {
       const response = await sendGetPostsRequest(filter);

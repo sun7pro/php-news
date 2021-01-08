@@ -27,4 +27,9 @@ class PostService
         }
         return Post::with('user')->orderBy('created_at', 'desc')->paginate(8);
     }
+
+    public function retrieve($id)
+    {
+        return Post::with('user')->where('id', '=', $id)->first();
+    }
 }

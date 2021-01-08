@@ -61,6 +61,7 @@ const Home = () => {
                 {response.posts.map(post => (
                   <PostItem
                     key={post.id}
+                    id={post.id}
                     title={post.title}
                     username={post.author.username}
                     created_at={post.created_at}
