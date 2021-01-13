@@ -35,4 +35,17 @@ class PostController extends Controller
             'page_total' => $result->lastPage(),
         ];
     }
+
+    public function retrieve($id)
+    {
+        $post = $this->postService->retrieve($id);
+        if ($post) {
+            return [
+                'post' => new PostResource($post),
+            ];
+        }
+        return [
+            'message' => __('The record doesn\'t exist.'),
+        ];
+    }
 }

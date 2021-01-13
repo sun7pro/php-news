@@ -4,6 +4,7 @@ import profileReducer from './profile/slice';
 import registerReducer from './register/slice';
 import addPostReducer from './addPost/slice';
 import getPostsReducer from './getPosts/slice';
+import getAPostReducer from './getAPost/slice';
 
 export default configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export default configureStore({
     register: registerReducer,
     addPost: addPostReducer,
     getPosts: getPostsReducer,
+    getAPost: getAPostReducer,
   },
   devTools: true,
 });

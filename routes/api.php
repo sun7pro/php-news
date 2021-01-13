@@ -12,4 +12,5 @@ Route::group([
 
     Route::middleware('auth:sanctum')->post('posts', [PostController::class, 'create']);
     Route::get('posts', [PostController::class, 'getAll']);
+    Route::get('/posts/{id}', [PostController::class, 'retrieve']);
 });
