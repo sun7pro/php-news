@@ -65,6 +65,8 @@ const Home = () => {
                     title={post.title}
                     username={post.author.username}
                     created_at={post.created_at}
+                    votes={post.votes}
+                    getPostByPage={getPostByPage}
                   />
                 ))}
                 <div className="filter-box pagination">

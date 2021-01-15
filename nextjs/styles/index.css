@@ -80,3 +80,8 @@
   background: #1a95e0;
   color: #fff;
 }
+
+.vote-box .disable {
+  opacity: 0.5;
+  cursor: no-drop;
+}

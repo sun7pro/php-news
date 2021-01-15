@@ -5,26 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
-use App\Models\Vote;
+use App\Models\Post;
 
-class Post extends Model
+class Vote extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'title',
-        'link',
-        'content',
-        'user_id',
-    ];
+    protected $fillable = [ 'user_id', 'post_id', 'value' ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function votes()
+    public function post()
     {
-        return $this->hasMany(Vote::class);
+        return $this->belongsTo(Post::class);
     }
 }
