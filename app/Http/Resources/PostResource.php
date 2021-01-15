@@ -14,7 +14,7 @@ class PostResource extends JsonResource
     {
         $vote = Vote::where([
             ['post_id', '=', $this->id],
-        ])->get()->sum('value');
+        ])->sum('value');
 
         return [
             'id' => (string)$this->id,
