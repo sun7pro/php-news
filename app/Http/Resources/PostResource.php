@@ -12,10 +12,6 @@ class PostResource extends JsonResource
 
     public function toArray($request)
     {
-        $vote = Vote::where([
-            ['post_id', '=', $this->id],
-        ])->sum('value');
-
         return [
             'id' => (string)$this->id,
             'title' => (string)$this->title,
@@ -23,7 +19,7 @@ class PostResource extends JsonResource
             'link' => $this->link ? (string)$this->link : '',
             'author' => new UserResource($this->whenLoaded('user')),
             'created_at' => $this->created_at,
-            'votes' => $vote,
+            'votes' => $this->votes_sum_value,
         ];
     }
 }

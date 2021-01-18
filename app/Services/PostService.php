@@ -25,11 +25,16 @@ class PostService
                 ->orderBy('created_at', 'desc')
                 ->paginate(8);
         }
-        return Post::with('user')->orderBy('created_at', 'desc')->paginate(8);
+        return Post::with('user')->orderBy('created_at', 'desc')->withSum('votes', 'value')->paginate(8);
     }
 
     public function retrieve($id)
     {
-        return Post::with('user')->where('id', '=', $id)->first();
+        return Post::with('user')->where('id', '=', $id)->withSum('votes', 'value')->first();
+    }
+
+    public function update($id, $votes)
+    {
+        Post::where('id', $id)->update([ 'votes' => $votes ]);
     }
 }
