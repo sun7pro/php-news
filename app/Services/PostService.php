@@ -33,8 +33,8 @@ class PostService
         return Post::with('user')->where('id', '=', $id)->withSum('votes', 'value')->first();
     }
 
-    public function update($id, $votes)
+    public function updateCommentQuantity($id, $number)
     {
-        Post::where('id', $id)->update([ 'votes' => $votes ]);
+        Post::where('id', $id)->update([ 'comment_quantity' => $number ]);
     }
 }

@@ -4,11 +4,15 @@ import Link from 'next/link';
 import Head from 'next/head';
 import { useDispatch, useSelector } from 'react-redux';
 import { doGetAPost } from '../../store/getAPost/thunks';
+import { getComments } from '../../store/getComments/thunks';
 import { doVotes } from '../../store/votes/thunks';
 import { selectGetAPost } from '../../store/getAPost/selector';
 import { timer, showTime } from '../../services/timer';
+import CommentForm from '../../containers/CommentForm';
+import CommentList from '../../containers/CommentList';
 
 const PostDetail = () => {
+
   const router = useRouter();
   const dispatch = useDispatch();
   const { postDetail } = router.query;
@@ -23,6 +27,7 @@ const PostDetail = () => {
 
   useEffect(() => {
     dispatch(doGetAPost(postId));
+    dispatch(getComments(postId));
   }, [router.query]);
 
   const handleVote = information => {
@@ -77,6 +82,14 @@ const PostDetail = () => {
             </p>
           )}
         </div>
+        {
+          post && (
+            <>
+              <CommentForm postId={post.id} />
+              <CommentList />
+            </>
+          )
+        }
       </section>
     </>
   );

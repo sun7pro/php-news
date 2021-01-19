@@ -5,6 +5,12 @@
   justify-content: flex-end;
 }
 
+.form-group--custom {
+  justify-content: flex-start;
+  padding-bottom: 1em;
+  border-bottom: 1px solid #e1e1e12b;
+}
+
 .form-group label {
   width: 20%;
 }
@@ -13,6 +19,10 @@
 .form-group textarea,
 .form-group button {
   width: 80%;
+}
+
+.form-group .btn--sendcmt {
+  width: auto;
 }
 
 .filter-box {
@@ -64,6 +74,7 @@
   flex-direction: column;
   text-align: end;
   cursor: pointer;
+  width: 20%;
 }
 
 .pagination {
@@ -84,4 +95,49 @@
 .vote-box .disable {
   opacity: 0.5;
   cursor: no-drop;
+}
+
+.comment-content {
+  background: #e1e1e129;
+  padding: 0.7em 1em;
+  border-radius: 16px;
+  border-bottom-left-radius: 0;
+  margin: 0;
+}
+
+.form-group--custom img[alt="avatar"] {
+  width: 35px;
+  border: 1px solid #0000002e;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.form-group--custom label {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+small.comment {
+  width: 15%;
+}
+
+small.comment img {
+  width: 15%;
+  opacity: 0.6;
+}
+
+small.comment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+small.time {
+  background: #3333332b;
+  color: #fff;
+  display: inline-block;
+  padding: 1px 5px;
+  margin-left: 10px;
+  border-radius: 9px;
 }

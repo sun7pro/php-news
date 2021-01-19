@@ -66,6 +66,7 @@ const Home = () => {
                     username={post.author.username}
                     created_at={post.created_at}
                     votes={post.votes}
+                    comment_quantity={post.comment_quantity}
                     getPostByPage={getPostByPage}
                   />
                 ))}
