@@ -13,7 +13,7 @@ const PostItem = ({
   created_at,
   votes,
   getPostByPage,
-  comment_quantity,
+  comment_count,
 }) => {
   const router = useRouter();
   const { date, page } = router.query;
@@ -51,7 +51,7 @@ const PostItem = ({
           className="comment__img"
           src="https://cdn.iconscout.com/icon/free/png-256/comment-2551199-2136583.png"
         />
-        {comment_quantity == 0 ? 'No comment.' : `${comment_quantity}`}
+        {comment_count == 0 ? 'No comment.' : `${comment_count}`}
       </small>
       <div className="infor">
         <span className="author">{`@${username}`}</span>
@@ -68,7 +68,7 @@ PostItem.propTypes = {
   title: PropTypes.string,
   username: PropTypes.string,
   created_at: PropTypes.string,
-  comment_quantity: PropTypes.number,
+  comment_count: PropTypes.number,
 };
 
 export default PostItem;

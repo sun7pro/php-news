@@ -20,7 +20,7 @@ class PostResource extends JsonResource
             'author' => new UserResource($this->whenLoaded('user')),
             'created_at' => $this->created_at,
             'votes' => $this->votes_sum_value !== null ? $this->votes_sum_value : 0,
-            'comment_quantity' => $this->comment_quantity,
+            'comment_count' => $this->comment_count,
         ];
     }
 }

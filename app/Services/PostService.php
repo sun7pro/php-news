@@ -3,7 +3,9 @@
 namespace App\Services;
 
 use App\Models\Post;
+use App\Models\Comment;
 use Carbon\Carbon;
+use DB;
 
 class PostService
 {
@@ -33,8 +35,27 @@ class PostService
         return Post::with('user')->where('id', '=', $id)->withSum('votes', 'value')->first();
     }
 
-    public function updateCommentQuantity($id, $number)
+    public function createComment($request)
     {
-        Post::where('id', $id)->update([ 'comment_quantity' => $number ]);
+        DB::transaction(function () use ($request) {
+            Comment::create([
+                'user_id' => $request->user()->id,
+                'post_id' => $request->input('postId'),
+                'content' => $request->input('content'),
+            ]);
+    
+            $commentCount = Comment::where([
+                ['post_id', '=', $request->input('postId')],
+            ])->orderBy('created_at', 'desc')->count();
+    
+            Post::where('id', $request->input('postId'))->update([ 'comment_count' => $commentCount ]);
+        });
+    }
+
+    public function getAllComments($postId)
+    {
+        return Comment::with('user')->where([
+            ['post_id', '=', $postId],
+        ])->orderBy('created_at', 'desc')->paginate(8);
     }
 }

@@ -17,7 +17,7 @@ class Post extends Model
         'link',
         'content',
         'user_id',
-        'comment_quantity',
+        'comment_count',
     ];
 
     public function user()

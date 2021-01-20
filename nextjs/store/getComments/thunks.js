@@ -3,9 +3,9 @@ import { sendGetCommentsRequest } from './services';
 
 export const getComments = createAsyncThunk(
   'comments/getComments',
-  async (postId, thunkAPI) => {
+  async (condition, thunkAPI) => {
     try {
-      const response = await sendGetCommentsRequest(postId);
+      const response = await sendGetCommentsRequest(condition);
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error.message });

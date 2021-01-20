@@ -5,13 +5,17 @@ const getCommentsSlice = createSlice({
   name: 'comments',
   initialState: {
     comments: [],
+    currentPage: 1,
+    pageTotal: 1,
   },
   extraReducers: {
     [getComments.pending]: () => {},
     [getComments.fulfilled]: (state, action) => {
-      action.payload.comments && (
-        state.comments = action.payload.comments
-      );
+      if (action.payload.comments) {
+        state.comments = action.payload.comments;
+        state.currentPage = action.payload.current_page;
+        state.pageTotal = action.payload.page_total;
+      }
     },
     [getComments.rejected]: state => {
       state.comments = [];

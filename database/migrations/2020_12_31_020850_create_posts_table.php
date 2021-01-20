@@ -20,7 +20,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->bigInteger('user_id')->unsigned();
             $table->integer('votes')->default(0);
-            $table->integer('comment_quantity')->default(0);
+            $table->integer('comment_count')->default(0);
             $table->timestamps();
         });
     }
