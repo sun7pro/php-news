@@ -46,7 +46,7 @@ class PostService
     
             $commentCount = Comment::where([
                 ['post_id', '=', $request->input('postId')],
-            ])->orderBy('created_at', 'desc')->count();
+            ])->count();
     
             Post::where('id', $request->input('postId'))->update([ 'comment_count' => $commentCount ]);
         });

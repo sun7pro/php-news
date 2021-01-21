@@ -24,7 +24,7 @@ const PostDetail = () => {
       .slice(-1)
       .pop();
   const { post } = useSelector(selectGetAPost);
-  const { comments, currentPage, pageTotal } = useSelector(selectGetComments);
+  const { currentPage, pageTotal } = useSelector(selectGetComments);
 
   useEffect(() => {
     dispatch(doGetAPost(postId));

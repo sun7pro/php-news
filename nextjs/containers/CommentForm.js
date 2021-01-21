@@ -12,7 +12,10 @@ const CommentForm = ({ postId }) => {
   const handleSubmit = event => {
     event.preventDefault();
     dispatch(addComment({ postId, content }));
-    dispatch(getComments(postId));
+    dispatch(getComments({
+      postId,
+      page: 1,
+    }));
     setContent('');
   };
 
