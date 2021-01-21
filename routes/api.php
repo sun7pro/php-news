@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\VoteController;
+use App\Http\Controllers\CommentController;
 
 Route::group([
     'prefix' => 'v1',
@@ -16,4 +17,7 @@ Route::group([
     Route::get('/posts/{id}', [PostController::class, 'retrieve']);
 
     Route::middleware('auth:sanctum')->post('/votes', [VoteController::class, 'vote']);
+
+    Route::middleware('auth:sanctum')->post('/comments', [CommentController::class, 'create']);
+    Route::get('/comments', [CommentController::class, 'getAll']);
 });

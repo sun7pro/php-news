@@ -4,14 +4,18 @@ import Link from 'next/link';
 import Head from 'next/head';
 import { useDispatch, useSelector } from 'react-redux';
 import { doGetAPost } from '../../store/getAPost/thunks';
+import { getComments } from '../../store/getComments/thunks';
 import { doVotes } from '../../store/votes/thunks';
 import { selectGetAPost } from '../../store/getAPost/selector';
+import { selectGetComments } from '../../store/getComments/selector';
 import { timer, showTime } from '../../services/timer';
+import CommentForm from '../../containers/CommentForm';
+import CommentList from '../../containers/CommentList';
 
 const PostDetail = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { postDetail } = router.query;
+  const { postDetail, page } = router.query;
   const postId =
     postDetail &&
     postDetail
@@ -20,9 +24,16 @@ const PostDetail = () => {
       .slice(-1)
       .pop();
   const { post } = useSelector(selectGetAPost);
+  const { currentPage, pageTotal } = useSelector(selectGetComments);
 
   useEffect(() => {
     dispatch(doGetAPost(postId));
+    dispatch(
+      getComments({
+        postId,
+        page: page || 1,
+      }),
+    );
   }, [router.query]);
 
   const handleVote = information => {
@@ -77,6 +88,35 @@ const PostDetail = () => {
             </p>
           )}
         </div>
+        {post && (
+          <>
+            <CommentForm postId={post.id} />
+            <CommentList />
+            <div className="filter-box pagination">
+              {[...Array(pageTotal)].map((item, index) => (
+                <Link
+                  href={{
+                    pathname: `/posts/${postDetail}`,
+                    query: {page: index + 1 }
+                  }}
+                  key={index}
+                >
+                  <a
+                    title="Sort by page"
+                    className={currentPage === index + 1 ? 'active' : ''}
+                    onClick={() =>
+                      dispatch(
+                        getComments({ page: index + 1, postId: post.id }),
+                      )
+                    }
+                  >
+                    {index + 1}
+                  </a>
+                </Link>
+              ))}
+            </div>
+          </>
+        )}
       </section>
     </>
   );

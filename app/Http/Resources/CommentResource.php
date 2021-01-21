@@ -4,9 +4,8 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\UserResource;
-use App\Models\Vote;
 
-class PostResource extends JsonResource
+class CommentResource extends JsonResource
 {
     public static $wrap = null;
 
@@ -14,13 +13,10 @@ class PostResource extends JsonResource
     {
         return [
             'id' => (string)$this->id,
-            'title' => (string)$this->title,
+            'post_id' => (string)$this->post_id,
             'content' => (string)$this->content,
-            'link' => $this->link ? (string)$this->link : '',
             'author' => new UserResource($this->whenLoaded('user')),
             'created_at' => $this->created_at,
-            'votes' => $this->votes_sum_value !== null ? $this->votes_sum_value : 0,
-            'comment_count' => $this->comment_count,
         ];
     }
 }

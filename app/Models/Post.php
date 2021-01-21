@@ -4,8 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
-use App\Models\Vote;
 
 class Post extends Model
 {
@@ -16,6 +14,7 @@ class Post extends Model
         'link',
         'content',
         'user_id',
+        'comment_count',
     ];
 
     public function user()
@@ -26,5 +25,10 @@ class Post extends Model
     public function votes()
     {
         return $this->hasMany(Vote::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }

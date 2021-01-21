@@ -5,6 +5,8 @@ import registerReducer from './register/slice';
 import addPostReducer from './addPost/slice';
 import getPostsReducer from './getPosts/slice';
 import getAPostReducer from './getAPost/slice';
+import addCommentReducer from './addComment/slice';
+import getComentsReducer from './getComments/slice';
 
 export default configureStore({
   reducer: {
@@ -14,6 +16,8 @@ export default configureStore({
     addPost: addPostReducer,
     getPosts: getPostsReducer,
     getAPost: getAPostReducer,
+    addComment: addCommentReducer,
+    getComments: getComentsReducer,
   },
   devTools: true,
 });
